@@ -1,0 +1,14 @@
+oracle_dbt:
+  outputs:
+    dev:
+      host: incluster-oracledb.incluster-oracledb.svc.cluster.local
+      password: '{{ env_var(''DBT_ORACLE_PASSWORD'') }}'
+      port: 1521
+      protocol: tcp
+      service: FREEPDB1
+      threads: 1
+      schema: system
+      type: oracle
+      user: system
+  target: dev
+  

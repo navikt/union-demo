@@ -1,0 +1,28 @@
+[0m14:01:25.215146 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11132ab10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x111399250>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x111399f90>]}
+
+
+============================== 14:01:25.217487 | 8e5fdcf2-08b2-4e9c-89b4-5d4e72909e57 ==============================
+[0m14:01:25.217487 [info ] [MainThread]: Running with dbt=1.7.9
+[0m14:01:25.217841 [debug] [MainThread]: running dbt with arguments {'version_check': 'True', 'quiet': 'False', 'profiles_dir': '/Users/erikvatt/.dbt', 'debug': 'False', 'warn_error_options': 'WarnErrorOptions(include=[], exclude=[])', 'send_anonymous_usage_stats': 'True', 'partial_parse': 'True', 'no_print': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'cache_selected_only': 'False', 'log_path': 'logs', 'write_json': 'True', 'indirect_selection': 'eager', 'log_format': 'default', 'log_cache_events': 'False', 'fail_fast': 'False', 'target_path': 'None', 'warn_error': 'None', 'invocation_command': 'dbt init oracle_dbt', 'static_parser': 'True', 'printer_width': '80', 'introspect': 'True'}
+[0m14:01:25.218406 [debug] [MainThread]: Starter project path: /Users/erikvatt/github.com/navikt/union-demo/myvenv/lib/python3.11/site-packages/dbt/include/starter_project
+[0m14:01:25.220953 [info ] [MainThread]: 
+Your new dbt project "oracle_dbt" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m14:01:25.221148 [info ] [MainThread]: Setting up your profile.
+[0m14:01:26.305036 [info ] [MainThread]: oracle adapter: Running in thin mode
+[0m14:04:31.772919 [info ] [MainThread]: Profile oracle_dbt written to /Users/erikvatt/.dbt/profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m14:04:31.774761 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11136c710>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1008128d0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x100812890>]}
+[0m14:04:31.775580 [debug] [MainThread]: Flushing usage events

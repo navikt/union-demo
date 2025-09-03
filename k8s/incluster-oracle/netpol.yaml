@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: incluster-oracledb-allow-ingress-flyte
+  namespace: incluster-oracledb
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: development
+      podSelector:
+        matchLabels:
+          domain: development
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: incluster-oracledb
+  policyTypes:
+  - Ingress

@@ -1,0 +1,4 @@
+dbt-oracle==1.7.7
+flytekit
+flytekitplugins-dbt
+#protobuf==6.32.0
