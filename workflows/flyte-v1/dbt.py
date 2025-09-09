@@ -10,7 +10,7 @@ from flytekitplugins.dbt.schema import (
 )
 from flytekitplugins.dbt.task import DBTRun, DBTTest, DBTFreshness
 
-with open("requirements_dbt.txt") as f:
+with open("requirements.txt") as f:
     packages = f.read().splitlines()
 
 image_spec = ImageSpec(
@@ -27,7 +27,7 @@ oracle_secret = Secret(
 )
 
 dbt_run_task = DBTRun(
-    name="run-tasken",
+    name="run-task",
     container_image=image_spec,
     secret_requests=[oracle_secret],
     requests=Resources(cpu="200m", mem="500Mi", ephemeral_storage="100Mi"),
@@ -58,7 +58,7 @@ def wf() -> Tuple[DBTRunOutput, DBTTestOutput, DBTFreshnessOutput]:
             project_dir="data/oracle_dbt",
             profiles_dir="data",
             profile="oracle_dbt",
-        )
+        ),
     )
     dbt_test_output = dbt_test_task(
         input=DBTTestInput(

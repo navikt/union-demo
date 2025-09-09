@@ -2,7 +2,7 @@ oracle_dbt:
   outputs:
     dev:
       host: incluster-oracledb.incluster-oracledb.svc.cluster.local
-      password: '{{ env_var(''DBT_ORACLE_PASSWORD'') }}'
+      password: supersecretpassword
       port: 1521
       protocol: tcp
       service: FREEPDB1
