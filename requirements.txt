@@ -4,10 +4,8 @@ adlfs==2025.8.0
     # via flytekit
 agate==1.7.1
     # via dbt-core
-aiobotocore==2.24.1
+aiobotocore==2.24.2
     # via s3fs
-aiofiles==24.1.0
-    # via flyte
 aiohappyeyeballs==2.6.1
     # via aiohttp
 aiohttp==3.12.15
@@ -15,6 +13,7 @@ aiohttp==3.12.15
     #   adlfs
     #   aiobotocore
     #   gcsfs
+    #   papermill
     #   s3fs
 aioitertools==0.12.0
     # via aiobotocore
@@ -22,10 +21,28 @@ aiosignal==1.4.0
     # via aiohttp
 annotated-types==0.7.0
     # via pydantic
+ansicolors==1.1.8
+    # via papermill
+antlr4-python3-runtime==4.11.1
+    # via soda-core
 anyio==4.10.0
-    # via httpx
+    # via
+    #   httpx
+    #   jupyter-server
+appnope==0.1.4
+    # via ipykernel
+argon2-cffi==25.1.0
+    # via jupyter-server
+argon2-cffi-bindings==25.1.0
+    # via argon2-cffi
+arrow==1.3.0
+    # via isoduration
+asn1crypto==1.5.1
+    # via snowflake-connector-python
+asttokens==3.0.0
+    # via stack-data
 async-lru==2.0.5
-    # via flyte
+    # via jupyterlab
 attrs==25.3.0
     # via
     #   aiohttp
@@ -44,11 +61,21 @@ azure-identity==1.24.0
 azure-storage-blob==12.26.0
     # via adlfs
 babel==2.17.0
-    # via agate
-backports-tarfile==1.2.0
-    # via jaraco-context
-botocore==1.39.11
-    # via aiobotocore
+    # via
+    #   agate
+    #   jupyterlab-server
+beautifulsoup4==4.13.5
+    # via nbconvert
+bleach==6.2.0
+    # via nbconvert
+boto3==1.40.18
+    # via snowflake-connector-python
+botocore==1.40.18
+    # via
+    #   aiobotocore
+    #   boto3
+    #   s3transfer
+    #   snowflake-connector-python
 cachetools==5.5.2
     # via google-auth
 certifi==2025.8.3
@@ -56,26 +83,36 @@ certifi==2025.8.3
     #   httpcore
     #   httpx
     #   requests
+    #   snowflake-connector-python
 cffi==1.17.1
     # via
+    #   argon2-cffi-bindings
     #   azure-datalake-store
     #   cryptography
     #   dbt-core
+    #   snowflake-connector-python
 charset-normalizer==3.4.3
-    # via requests
+    # via
+    #   requests
+    #   snowflake-connector-python
 click==8.2.1
     # via
     #   dbt-core
     #   dbt-semantic-interfaces
-    #   flyte
     #   flytekit
+    #   papermill
     #   rich-click
-cloudpickle==3.1.1
+    #   soda-core
+cloudpickle==3.0.0
     # via
-    #   flyte
     #   flytekit
+    #   snowflake-snowpark-python
 colorama==0.4.6
     # via dbt-core
+comm==0.2.3
+    # via
+    #   ipykernel
+    #   ipywidgets
 croniter==6.0.0
     # via flytekit
 cryptography==45.0.7
@@ -83,38 +120,75 @@ cryptography==45.0.7
     #   azure-identity
     #   azure-storage-blob
     #   msal
-    #   oracledb
     #   pyjwt
+    #   pyopenssl
+    #   snowflake-connector-python
 dataclasses-json==0.5.9
+    # via flytekit
+db-dtypes==1.4.3
     # via
-    #   flyte
-    #   flytekit
+    #   google-cloud-bigquery
+    #   pandas-gbq
+dbt-bigquery==1.7.9
+    # via -r requirements.in
 dbt-core==1.7.9
-    # via flytekitplugins-dbt
+    # via
+    #   dbt-bigquery
+    #   flytekitplugins-dbt
 dbt-extractor==0.5.1
     # via dbt-core
 dbt-semantic-interfaces==0.4.4
     # via dbt-core
+debugpy==1.8.16
+    # via ipykernel
 decorator==5.2.1
-    # via gcsfs
+    # via
+    #   gcsfs
+    #   ipython
+defusedxml==0.7.1
+    # via nbconvert
+deprecated==1.2.18
+    # via
+    #   opentelemetry-api
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-semantic-conventions
 diskcache==5.6.3
     # via flytekit
 docker==7.1.0
     # via flytekit
 docstring-parser==0.17.0
     # via flytekit
-flyte==2.0.0b18
+dotenv==0.9.9
     # via -r requirements.in
-flyteidl==1.16.0
+entrypoints==0.4
+    # via papermill
+executing==2.2.1
+    # via stack-data
+fastjsonschema==2.21.2
+    # via nbformat
+filelock==3.19.1
     # via
-    #   flyte
-    #   flytekit
+    #   snowflake-connector-python
+    #   torch
+flyteidl==1.16.0
+    # via flytekit
 flytekit==1.16.3
     # via
     #   -r requirements.in
     #   flytekitplugins-dbt
+    #   flytekitplugins-deck-standard
+    #   flytekitplugins-papermill
+    #   flytekitplugins-snowflake
 flytekitplugins-dbt==1.16.3
     # via -r requirements.in
+flytekitplugins-deck-standard==1.16.3
+    # via -r requirements.in
+flytekitplugins-papermill==1.16.3
+    # via -r requirements.in
+flytekitplugins-snowflake==1.16.3
+    # via -r requirements.in
+fqdn==1.5.1
+    # via jsonschema
 frozenlist==1.7.0
     # via
     #   aiohttp
@@ -122,102 +196,229 @@ frozenlist==1.7.0
 fsspec==2025.7.0
     # via
     #   adlfs
-    #   flyte
     #   flytekit
     #   gcsfs
+    #   modin
     #   s3fs
+    #   torch
 gcsfs==2025.7.0
     # via flytekit
 google-api-core==2.25.1
     # via
+    #   dbt-bigquery
+    #   google-cloud-bigquery
+    #   google-cloud-bigquery-storage
     #   google-cloud-core
+    #   google-cloud-dataproc
     #   google-cloud-storage
+    #   pandas-gbq
 google-auth==2.40.3
     # via
     #   gcsfs
     #   google-api-core
     #   google-auth-oauthlib
+    #   google-cloud-bigquery
+    #   google-cloud-bigquery-storage
     #   google-cloud-core
+    #   google-cloud-dataproc
     #   google-cloud-storage
+    #   pandas-gbq
+    #   pydata-google-auth
 google-auth-oauthlib==1.2.2
-    # via gcsfs
+    # via
+    #   gcsfs
+    #   pandas-gbq
+    #   pydata-google-auth
+google-cloud-bigquery==3.36.0
+    # via
+    #   dbt-bigquery
+    #   pandas-gbq
+    #   soda-core-bigquery
+google-cloud-bigquery-storage==2.32.0
+    # via -r requirements.in
 google-cloud-core==2.4.3
-    # via google-cloud-storage
-google-cloud-storage==3.3.1
-    # via gcsfs
+    # via
+    #   google-cloud-bigquery
+    #   google-cloud-storage
+google-cloud-dataproc==5.21.0
+    # via dbt-bigquery
+google-cloud-storage==2.19.0
+    # via
+    #   dbt-bigquery
+    #   gcsfs
 google-crc32c==1.7.1
     # via
     #   google-cloud-storage
     #   google-resumable-media
 google-resumable-media==2.7.2
-    # via google-cloud-storage
+    # via
+    #   google-cloud-bigquery
+    #   google-cloud-storage
 googleapis-common-protos==1.70.0
     # via
     #   flyteidl
     #   flytekit
     #   google-api-core
+    #   grpc-google-iam-v1
     #   grpcio-status
+    #   opentelemetry-exporter-otlp-proto-http
     #   protoc-gen-openapiv2
-grpcio==1.74.0
+grpc-google-iam-v1==0.14.2
+    # via google-cloud-dataproc
+grpcio==1.68.0
     # via
-    #   flyte
     #   flytekit
+    #   google-api-core
+    #   google-cloud-bigquery
+    #   googleapis-common-protos
+    #   grpc-google-iam-v1
     #   grpcio-status
-grpcio-status==1.74.0
-    # via flytekit
+grpcio-status==1.62.3
+    # via
+    #   flytekit
+    #   google-api-core
 h11==0.16.0
     # via httpcore
 httpcore==1.0.9
     # via httpx
 httpx==0.28.1
-    # via flyte
+    # via jupyterlab
 idna==3.10
     # via
     #   anyio
     #   dbt-core
     #   httpx
+    #   jsonschema
     #   requests
+    #   snowflake-connector-python
     #   yarl
 importlib-metadata==6.11.0
     # via
     #   dbt-semantic-interfaces
     #   flytekit
-    #   keyring
+    #   opentelemetry-api
+inflect==7.5.0
+    # via soda-core
+ipykernel==6.30.1
+    # via
+    #   flytekitplugins-papermill
+    #   jupyter
+    #   jupyter-console
+    #   jupyterlab
+ipython==9.5.0
+    # via
+    #   ipykernel
+    #   ipywidgets
+    #   jupyter-console
+ipython-pygments-lexers==1.1.1
+    # via ipython
+ipywidgets==8.1.7
+    # via
+    #   jupyter
+    #   snowflake-snowpark-python
 isodate==0.6.1
     # via
     #   agate
     #   azure-storage-blob
     #   dbt-core
+isoduration==20.11.0
+    # via jsonschema
 jaraco-classes==3.4.0
     # via keyring
 jaraco-context==6.0.1
     # via keyring
 jaraco-functools==4.3.0
     # via keyring
+jedi==0.19.2
+    # via ipython
 jinja2==3.1.6
     # via
     #   dbt-core
     #   dbt-semantic-interfaces
+    #   jupyter-server
+    #   jupyterlab
+    #   jupyterlab-server
+    #   nbconvert
+    #   soda-core
+    #   torch
 jmespath==1.0.1
     # via
     #   aiobotocore
+    #   boto3
     #   botocore
 joblib==1.5.2
-    # via flytekit
+    # via
+    #   flytekit
+    #   scikit-learn
+json5==0.12.1
+    # via jupyterlab-server
 jsonlines==4.0.0
     # via flytekit
 jsonpickle==4.1.1
     # via flytekit
+jsonpointer==3.0.0
+    # via jsonschema
 jsonschema==4.25.1
     # via
     #   dbt-core
     #   dbt-semantic-interfaces
+    #   jupyter-events
+    #   jupyterlab-server
+    #   nbformat
 jsonschema-specifications==2025.4.1
     # via jsonschema
-keyring==25.6.0
+jupyter==1.1.1
     # via
-    #   flyte
-    #   flytekit
+    #   -r requirements.in
+    #   quarto-cli
+jupyter-client==8.6.3
+    # via
+    #   ipykernel
+    #   jupyter-console
+    #   jupyter-server
+    #   nbclient
+jupyter-console==6.6.3
+    # via jupyter
+jupyter-core==5.8.1
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   jupyter-console
+    #   jupyter-server
+    #   jupyterlab
+    #   nbclient
+    #   nbconvert
+    #   nbformat
+jupyter-events==0.12.0
+    # via jupyter-server
+jupyter-lsp==2.3.0
+    # via jupyterlab
+jupyter-server==2.17.0
+    # via
+    #   jupyter-lsp
+    #   jupyterlab
+    #   jupyterlab-server
+    #   notebook
+    #   notebook-shim
+jupyter-server-terminals==0.5.3
+    # via jupyter-server
+jupyterlab==4.4.4
+    # via
+    #   -r requirements.in
+    #   jupyter
+    #   notebook
+jupyterlab-pygments==0.3.0
+    # via nbconvert
+jupyterlab-server==2.27.3
+    # via
+    #   jupyterlab
+    #   notebook
+jupyterlab-widgets==3.0.15
+    # via ipywidgets
+keyring==25.6.0
+    # via flytekit
+lark==1.2.2
+    # via rfc3987-syntax
 leather==0.4.0
     # via agate
 logbook==1.5.3
@@ -227,7 +428,9 @@ markdown-it-py==4.0.0
     #   flytekit
     #   rich
 markupsafe==3.0.2
-    # via jinja2
+    # via
+    #   jinja2
+    #   nbconvert
 marshmallow==3.26.1
     # via
     #   dataclasses-json
@@ -242,17 +445,27 @@ marshmallow-jsonschema==0.13.0
 mashumaro==3.16
     # via
     #   dbt-core
-    #   flyte
     #   flytekit
+matplotlib-inline==0.1.7
+    # via
+    #   ipykernel
+    #   ipython
 mdurl==0.1.2
     # via markdown-it-py
 minimal-snowplow-tracker==0.0.2
     # via dbt-core
+mistune==3.1.4
+    # via nbconvert
+modin==0.34.1
+    # via snowflake-snowpark-python
 more-itertools==10.7.0
     # via
     #   dbt-semantic-interfaces
+    #   inflect
     #   jaraco-classes
     #   jaraco-functools
+mpmath==1.3.0
+    # via sympy
 msal==1.33.0
     # via
     #   azure-datalake-store
@@ -262,7 +475,6 @@ msal-extensions==1.3.1
     # via azure-identity
 msgpack==1.1.1
     # via
-    #   flyte
     #   flytekit
     #   mashumaro
 multidict==6.6.4
@@ -272,48 +484,162 @@ multidict==6.6.4
     #   yarl
 mypy-extensions==1.1.0
     # via typing-inspect
+narwhals==2.4.0
+    # via plotly
+nbclient==0.10.2
+    # via
+    #   nbconvert
+    #   papermill
+    #   quarto-cli
+nbconvert==7.16.6
+    # via
+    #   flytekitplugins-papermill
+    #   jupyter
+    #   jupyter-server
+nbformat==5.10.4
+    # via
+    #   jupyter-server
+    #   nbclient
+    #   nbconvert
+    #   papermill
+nest-asyncio==1.6.0
+    # via ipykernel
 networkx==3.5
     # via
     #   dbt-core
     #   flytekitplugins-dbt
+    #   torch
+notebook==7.4.4
+    # via jupyter
+notebook-shim==0.2.4
+    # via
+    #   jupyterlab
+    #   notebook
 numpy==2.3.2
-    # via pandas
+    # via
+    #   db-dtypes
+    #   modin
+    #   pandas
+    #   pandas-gbq
+    #   scikit-learn
+    #   scipy
+    #   torchvision
 oauthlib==3.3.1
     # via requests-oauthlib
-obstore==0.8.1
-    # via flyte
-oracledb==2.5.1
-    # via -r requirements.in
+opentelemetry-api==1.27.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-http
+    #   opentelemetry-sdk
+    #   opentelemetry-semantic-conventions
+    #   soda-core
+opentelemetry-exporter-otlp-proto-common==1.27.0
+    # via opentelemetry-exporter-otlp-proto-http
+opentelemetry-exporter-otlp-proto-http==1.27.0
+    # via soda-core
+opentelemetry-proto==1.27.0
+    # via
+    #   opentelemetry-exporter-otlp-proto-common
+    #   opentelemetry-exporter-otlp-proto-http
+opentelemetry-sdk==1.27.0
+    # via opentelemetry-exporter-otlp-proto-http
+opentelemetry-semantic-conventions==0.48b0
+    # via opentelemetry-sdk
 packaging==25.0
     # via
+    #   db-dtypes
     #   dbt-core
+    #   google-cloud-bigquery
+    #   ipykernel
+    #   jupyter-events
+    #   jupyter-server
+    #   jupyterlab
+    #   jupyterlab-server
     #   marshmallow
-pandas==2.3.2
-    # via -r requirements.in
+    #   modin
+    #   nbconvert
+    #   pandas-gbq
+    #   plotly
+    #   snowflake-connector-python
+pandas==2.2.3
+    # via
+    #   -r requirements.in
+    #   db-dtypes
+    #   google-cloud-bigquery
+    #   modin
+    #   pandas-gbq
+    #   snowflake-connector-python
+pandas-gbq==0.29.2
+    # via google-cloud-bigquery
+pandocfilters==1.5.1
+    # via nbconvert
+papermill==2.6.0
+    # via flytekitplugins-papermill
 parsedatetime==2.6
     # via agate
+parso==0.8.5
+    # via jedi
 pathspec==0.11.2
     # via dbt-core
+pexpect==4.9.0
+    # via ipython
+pillow==11.3.0
+    # via torchvision
+platformdirs==4.4.0
+    # via
+    #   jupyter-core
+    #   snowflake-connector-python
+plotly==6.1.2
+    # via -r requirements.in
+prometheus-client==0.22.1
+    # via jupyter-server
+prompt-toolkit==3.0.52
+    # via
+    #   ipython
+    #   jupyter-console
 propcache==0.3.2
     # via
     #   aiohttp
     #   yarl
 proto-plus==1.26.1
-    # via google-api-core
-protobuf==6.32.0
+    # via
+    #   google-api-core
+    #   google-cloud-bigquery-storage
+    #   google-cloud-dataproc
+protobuf==4.25.8
     # via
     #   -r requirements.in
     #   dbt-core
-    #   flyte
     #   flyteidl
     #   flytekit
     #   google-api-core
+    #   google-cloud-bigquery-storage
+    #   google-cloud-dataproc
     #   googleapis-common-protos
+    #   grpc-google-iam-v1
     #   grpcio-status
+    #   opentelemetry-proto
     #   proto-plus
     #   protoc-gen-openapiv2
+    #   snowflake-snowpark-python
 protoc-gen-openapiv2==0.0.1
     # via flyteidl
+psutil==7.0.0
+    # via
+    #   ipykernel
+    #   modin
+ptyprocess==0.7.0
+    # via
+    #   pexpect
+    #   terminado
+pure-eval==0.2.3
+    # via stack-data
+pyarrow==18.1.0
+    # via
+    #   -r requirements.in
+    #   db-dtypes
+    #   google-cloud-bigquery
+    #   pandas-gbq
+    #   snowflake-connector-python
 pyasn1==0.6.1
     # via
     #   pyasn1-modules
@@ -325,24 +651,42 @@ pycparser==2.22
 pydantic==2.11.7
     # via
     #   dbt-semantic-interfaces
-    #   flyte
+    #   soda-core
 pydantic-core==2.33.2
     # via pydantic
+pydata-google-auth==1.9.1
+    # via pandas-gbq
 pygments==2.19.2
     # via
     #   flytekit
+    #   ipython
+    #   ipython-pygments-lexers
+    #   jupyter-console
+    #   nbconvert
     #   rich
 pyjwt==2.10.1
-    # via msal
+    # via
+    #   msal
+    #   snowflake-connector-python
+pyopenssl==25.1.0
+    # via snowflake-connector-python
 python-dateutil==2.9.0.post0
     # via
     #   aiobotocore
+    #   arrow
     #   botocore
     #   croniter
     #   dbt-semantic-interfaces
+    #   google-cloud-bigquery
+    #   jupyter-client
     #   pandas
+    #   snowflake-snowpark-python
+python-dotenv==1.1.1
+    # via dotenv
 python-json-logger==3.3.0
-    # via flytekit
+    # via
+    #   flytekit
+    #   jupyter-events
 python-slugify==8.0.4
     # via agate
 pytimeparse==1.1.8
@@ -354,16 +698,29 @@ pytz==2025.2
     #   croniter
     #   dbt-core
     #   pandas
+    #   snowflake-connector-python
 pyyaml==6.0.2
     # via
+    #   -r requirements.in
     #   dbt-core
     #   dbt-semantic-interfaces
-    #   flyte
     #   flytekit
+    #   jupyter-events
+    #   papermill
+    #   snowflake-snowpark-python
+pyzmq==27.1.0
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   jupyter-console
+    #   jupyter-server
+quarto-cli==1.7.34
+    # via -r requirements.in
 referencing==0.36.2
     # via
     #   jsonschema
     #   jsonschema-specifications
+    #   jupyter-events
 requests==2.32.5
     # via
     #   azure-core
@@ -373,46 +730,146 @@ requests==2.32.5
     #   flytekit
     #   gcsfs
     #   google-api-core
+    #   google-cloud-bigquery
     #   google-cloud-storage
+    #   jupyterlab-server
     #   minimal-snowplow-tracker
     #   msal
+    #   opentelemetry-exporter-otlp-proto-http
+    #   papermill
     #   requests-oauthlib
+    #   snowflake-connector-python
+    #   soda-core
 requests-oauthlib==2.0.0
     # via google-auth-oauthlib
+rfc3339-validator==0.1.4
+    # via
+    #   jsonschema
+    #   jupyter-events
+rfc3986-validator==0.1.1
+    # via
+    #   jsonschema
+    #   jupyter-events
+rfc3987-syntax==1.1.0
+    # via jsonschema
 rich==14.1.0
     # via
     #   flytekit
     #   rich-click
 rich-click==1.8.9
-    # via
-    #   flyte
-    #   flytekit
+    # via flytekit
 rpds-py==0.27.1
     # via
     #   jsonschema
     #   referencing
 rsa==4.9.1
     # via google-auth
+ruamel-yaml==0.17.40
+    # via soda-core
+ruamel-yaml-clib==0.2.12
+    # via ruamel-yaml
 s3fs==2025.7.0
     # via flytekit
+s3transfer==0.13.1
+    # via boto3
+scikit-learn==1.7.0
+    # via -r requirements.in
+scipy==1.16.1
+    # via scikit-learn
+send2trash==1.8.3
+    # via jupyter-server
+setuptools==80.9.0
+    # via
+    #   jupyterlab
+    #   pandas-gbq
+    #   pydata-google-auth
+    #   snowflake-snowpark-python
+    #   torch
 six==1.17.0
     # via
     #   azure-core
     #   isodate
     #   minimal-snowplow-tracker
     #   python-dateutil
+    #   rfc3339-validator
 sniffio==1.3.1
     # via anyio
-sqlalchemy==2.0.43
+snowflake-connector-python==3.16.0
+    # via
+    #   -r requirements.in
+    #   flytekitplugins-snowflake
+    #   snowflake-snowpark-python
+snowflake-snowpark-python==1.35.0
     # via -r requirements.in
+soda-core==3.5.4
+    # via soda-core-bigquery
+soda-core-bigquery==3.5.4
+    # via -r requirements.in
+sortedcontainers==2.4.0
+    # via snowflake-connector-python
+soupsieve==2.8
+    # via beautifulsoup4
 sqlparse==0.4.4
-    # via dbt-core
+    # via
+    #   dbt-core
+    #   soda-core
+stack-data==0.6.3
+    # via ipython
 statsd==4.0.1
     # via flytekit
+sympy==1.14.0
+    # via torch
+tenacity==9.1.2
+    # via papermill
+terminado==0.18.1
+    # via
+    #   jupyter-server
+    #   jupyter-server-terminals
 text-unidecode==1.3
     # via python-slugify
-toml==0.10.2
-    # via flyte
+threadpoolctl==3.6.0
+    # via scikit-learn
+tinycss2==1.4.0
+    # via bleach
+tomlkit==0.13.3
+    # via snowflake-connector-python
+torch==2.7.1
+    # via
+    #   -r requirements.in
+    #   torchvision
+torchvision==0.22.1
+    # via -r requirements.in
+tornado==6.5.2
+    # via
+    #   ipykernel
+    #   jupyter-client
+    #   jupyter-server
+    #   jupyterlab
+    #   notebook
+    #   terminado
+tqdm==4.67.1
+    # via
+    #   papermill
+    #   snowflake-snowpark-python
+traitlets==5.14.3
+    # via
+    #   ipykernel
+    #   ipython
+    #   ipywidgets
+    #   jupyter-client
+    #   jupyter-console
+    #   jupyter-core
+    #   jupyter-events
+    #   jupyter-server
+    #   jupyterlab
+    #   matplotlib-inline
+    #   nbclient
+    #   nbconvert
+    #   nbformat
+typeguard==4.4.4
+    # via inflect
+types-python-dateutil==2.9.0.20250822
+    # via arrow
 typing-extensions==4.15.0
     # via
     #   aiosignal
@@ -420,16 +877,21 @@ typing-extensions==4.15.0
     #   azure-core
     #   azure-identity
     #   azure-storage-blob
+    #   beautifulsoup4
     #   dbt-core
     #   dbt-semantic-interfaces
     #   flytekit
     #   mashumaro
-    #   obstore
+    #   opentelemetry-sdk
     #   pydantic
     #   pydantic-core
+    #   pyopenssl
     #   referencing
     #   rich-click
-    #   sqlalchemy
+    #   snowflake-connector-python
+    #   snowflake-snowpark-python
+    #   torch
+    #   typeguard
     #   typing-inspect
     #   typing-inspection
 typing-inspect==0.9.0
@@ -438,6 +900,10 @@ typing-inspection==0.4.1
     # via pydantic
 tzdata==2025.2
     # via pandas
+tzlocal==5.3.1
+    # via snowflake-snowpark-python
+uri-template==1.3.0
+    # via jsonschema
 urllib3==1.26.20
     # via
     #   botocore
@@ -445,8 +911,26 @@ urllib3==1.26.20
     #   docker
     #   flytekit
     #   requests
+wcwidth==0.2.13
+    # via prompt-toolkit
+webcolors==24.11.1
+    # via jsonschema
+webencodings==0.5.1
+    # via
+    #   bleach
+    #   tinycss2
+websocket-client==1.8.0
+    # via jupyter-server
+wheel==0.45.1
+    # via
+    #   quarto-cli
+    #   snowflake-snowpark-python
+widgetsnbextension==4.0.14
+    # via ipywidgets
 wrapt==1.17.3
-    # via aiobotocore
+    # via
+    #   aiobotocore
+    #   deprecated
 yarl==1.20.1
     # via aiohttp
 zipp==3.23.0

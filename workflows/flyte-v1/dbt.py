@@ -1,84 +1,44 @@
-from typing import Tuple
-from flytekit import workflow, Resources, ImageSpec, Secret
+from flytekit import workflow, Resources
+from flytekit import ImageSpec
 from flytekitplugins.dbt.schema import (
     DBTRunInput,
     DBTRunOutput,
-    DBTTestInput,
-    DBTTestOutput,
-    DBTFreshnessInput,
-    DBTFreshnessOutput,
 )
-from flytekitplugins.dbt.task import DBTRun, DBTTest, DBTFreshness
+from flytekitplugins.dbt.task import DBTRun
 
-with open("requirements.txt") as f:
-    packages = f.read().splitlines()
-
-image_spec = ImageSpec(
-    registry="europe-north1-docker.pkg.dev/knada-project/flyteimages",
-    packages=packages,
-    copy=["data"],
-)
-
-SECRET_NAME = "oracle-password"
-oracle_secret = Secret(
-    group=SECRET_NAME,
-    key=SECRET_NAME,
-    mount_requirement=Secret.MountType.ENV_VAR,
-)
+# SECRET_NAME = "oracle-password"
+# oracle_secret = Secret(
+#     group=SECRET_NAME,
+#     key=SECRET_NAME,
+#     mount_requirement=Secret.MountType.ENV_VAR,
+# )
 
 dbt_run_task = DBTRun(
     name="run-task",
-    container_image=image_spec,
-    secret_requests=[oracle_secret],
-    requests=Resources(cpu="200m", mem="500Mi", ephemeral_storage="100Mi"),
-    limits=Resources(cpu="200m", mem="1Gi", ephemeral_storage="100Mi"),
-)
-
-dbt_test_task = DBTTest(
-    name="test-task",
-    container_image=image_spec,
-    secret_requests=[oracle_secret],
-    requests=Resources(cpu="200m", mem="500Mi", ephemeral_storage="100Mi"),
-    limits=Resources(cpu="200m", mem="1Gi", ephemeral_storage="100Mi"),
-)
-
-dbt_freshness_task = DBTFreshness(
-    name="freshness-task",
-    container_image=image_spec,
-    secret_requests=[oracle_secret],
+    container_image=ImageSpec(
+      registry="europe-north1-docker.pkg.dev/knada-project/flyteimages",
+      packages=[
+          "dbt-oracle==1.7.7",
+          "flytekitplugins-dbt==1.16.3",
+      ],
+      copy=["data"],
+    ),
     requests=Resources(cpu="200m", mem="500Mi", ephemeral_storage="100Mi"),
     limits=Resources(cpu="200m", mem="1Gi", ephemeral_storage="100Mi"),
 )
 
 
 @workflow
-def wf() -> Tuple[DBTRunOutput, DBTTestOutput, DBTFreshnessOutput]:
+def wf() -> DBTRunOutput:
     dbt_run_output = dbt_run_task(
         input=DBTRunInput(
             project_dir="data/oracle_dbt",
-            profiles_dir="data",
+            profiles_dir="data/oracle_dbt",
             profile="oracle_dbt",
         ),
     )
-    dbt_test_output = dbt_test_task(
-        input=DBTTestInput(
-            project_dir="data/oracle_dbt",
-            profiles_dir="data",
-            profile="oracle_dbt",
-        )
-    )
-    dbt_freshness_output = dbt_freshness_task(
-        input=DBTFreshnessInput(
-            project_dir="data/oracle_dbt",
-            profiles_dir="data",
-            profile="oracle_dbt",
-        )
-    )
 
-    dbt_run_output >> dbt_test_output
-    dbt_test_output >> dbt_freshness_output
-
-    return dbt_run_output, dbt_test_output, dbt_freshness_output
+    return dbt_run_output
 
 
 if __name__ == "__main__":

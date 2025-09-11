@@ -11,4 +11,3 @@ oracle_dbt:
       type: oracle
       user: system
   target: dev
-  

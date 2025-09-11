@@ -1,37 +1,24 @@
-flyte==2.0.0b18
 flytekit==1.16.3
 flytekitplugins-dbt==1.16.3
-protobuf==6.32.0
-oracledb==2.5.1
-pandas==2.3.2
-sqlalchemy==2.0.43
-#flytekitplugins-dbt==1.16.3
-#flytekitplugins-papermill==1.16.3
-#flytekitplugins-snowflake==1.16.3
-#flytekitplugins-pod==1.16.3
-#flytekitplugins-deck-standard==1.16.3
-#dbt-bigquery==1.7.9
-#dbt-bigquery==1.7.9
-#dbt==1.0.0.40.5
-#dbt-oracle==1.7.7
-# jupyter
-# quarto-cli
-# jupyterlab==4.4.4
-# kubernetes==33.1.0
-# pyarrow==18.1.0
-# pyyaml==6.0.2
-# soda-core-bigquery==3.5.4
-# snowflake-connector-python==3.16.0
-# snowflake-connector-python[pandas]==3.16.0
-# snowflake-snowpark-python==1.35.0
-# snowflake-snowpark-python[modin]==1.35.0
-# google-cloud-bigquery-storage==2.32.0
-# google-cloud-secret-manager==2.24.0
-# dotenv==0.9.9
-# pandas==2.2.3
-# protobuf==4.25.8 #v5 incompatible with dbt-bigquery 1.7.9
-# scikit-learn==1.7.0
-# plotly==6.1.2
-# torch==2.7.1
-# torchvision==0.22.1
-# #union==0.1.190
+flytekitplugins-papermill==1.16.3
+flytekitplugins-snowflake==1.16.3
+flytekitplugins-deck-standard==1.16.3
+dbt-bigquery==1.7.9
+jupyter
+quarto-cli
+jupyterlab==4.4.4
+pyarrow==18.1.0
+pyyaml==6.0.2
+soda-core-bigquery==3.5.4
+snowflake-connector-python==3.16.0
+snowflake-connector-python[pandas]==3.16.0
+snowflake-snowpark-python==1.35.0
+snowflake-snowpark-python[modin]==1.35.0
+google-cloud-bigquery-storage==2.32.0
+dotenv==0.9.9
+pandas==2.2.3
+protobuf==4.25.8 #v5 incompatible with dbt-bigquery 1.7.9
+scikit-learn==1.7.0
+plotly==6.1.2
+torch==2.7.1
+torchvision==0.22.1
