@@ -6,19 +6,13 @@ from flytekitplugins.dbt.schema import (
 )
 from flytekitplugins.dbt.task import DBTRun
 
-# SECRET_NAME = "oracle-password"
-# oracle_secret = Secret(
-#     group=SECRET_NAME,
-#     key=SECRET_NAME,
-#     mount_requirement=Secret.MountType.ENV_VAR,
-# )
-
 dbt_run_task = DBTRun(
     name="run-task",
     container_image=ImageSpec(
       registry="europe-north1-docker.pkg.dev/knada-project/flyteimages",
       packages=[
           "dbt-oracle==1.7.7",
+          "dbt-core==1.7.9",
           "flytekitplugins-dbt==1.16.3",
       ],
       copy=["data"],
