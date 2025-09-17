@@ -1,0 +1,8 @@
+oracledb==2.5.1
+fastparquet==2024.11.0
+google-cloud-bigquery==3.37.0
+pandas-gbq==0.29.2
+pandas==2.2.2
+db-dtypes
+sqlalchemy==2.0.43
+datastory
