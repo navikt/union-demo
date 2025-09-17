@@ -22,7 +22,7 @@ dbt_run_task = DBTRun(
 
 
 @workflow
-def wf() -> DBTRunOutput:
+def run_dbt() -> DBTRunOutput:
     dbt_run_output = dbt_run_task(
         input=DBTRunInput(
             project_dir="data/oracle_dbt",
@@ -35,4 +35,4 @@ def wf() -> DBTRunOutput:
 
 
 if __name__ == "__main__":
-    print(f"Running wf() {wf()}")
+    print(f"Running run_dbt() {run_dbt()}")
