@@ -1,3 +1,5 @@
+# For å bruke pandas dataframe som output fra en flyte task må pyarrow og fastparquet være installert i miljøet
+
 from flytekit import workflow, Resources, ImageSpec, kwtypes, task
 from flytekitplugins.papermill import NotebookTask
 import pandas as pd
