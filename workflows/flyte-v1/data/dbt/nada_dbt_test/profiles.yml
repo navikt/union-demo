@@ -1,0 +1,13 @@
+nada_dbt_test:
+  target: dev
+  outputs:
+    dev:
+      dataset: dbt_tests
+      job_execution_timeout_seconds: 300
+      job_retries: 1
+      location: europe-north1
+      method: oauth
+      priority: interactive
+      project: nada-dev-db2e
+      threads: 1
+      type: bigquery
