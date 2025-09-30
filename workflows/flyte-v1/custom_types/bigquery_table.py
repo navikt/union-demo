@@ -6,6 +6,7 @@ from google.cloud import bigquery, bigquery_storage
 from google.cloud.bigquery_storage_v1 import types
 
 from flytekit import lazy_module
+from flytekit.models import literals
 from flytekit.extend import TypeTransformer, TypeEngine
 from flytekit.models.types import LiteralType, StructuredDatasetType
 from flytekit.models.literals import StructuredDatasetMetadata
@@ -49,24 +50,24 @@ class CustomBigQueryTableTransformer(TypeTransformer[CustomBigQueryTable]):
       return LiteralType(structured_dataset_type=StructuredDatasetType())
 
   def to_literal(
-      self,
-      ctx: FlyteContext,
-      python_val: CustomBigQueryTable,
-      python_type: Type[CustomBigQueryTable],
-      expected: LiteralType,
-  ) -> Literal:
-      table_id = cast(str, python_val.uri).split("://", 1)[1].replace(":", ".")
-      client = bigquery.Client(project=python_val.project_id)
-      client.load_table_from_dataframe(python_val.dataframe, table_id)
+        self,
+        ctx: FlyteContext,
+        python_val: CustomBigQueryTable,
+        python_type: Type[CustomBigQueryTable],
+        expected: LiteralType,
+    ) -> Literal:
+        table_id = cast(str, python_val.uri).split("://", 1)[1].replace(":", ".")
+        client = bigquery.Client(project=python_val.project_id)
+        client.load_table_from_dataframe(python_val.dataframe, table_id)
 
-      return Literal(scalar=Scalar(structured_dataset=StructuredDataset(uri=python_val.uri)._literal_sd))
+        return Literal(scalar=Scalar(structured_dataset=literals.StructuredDataset(uri=python_val.uri)))
 
   def to_python_value(self, ctx: FlyteContext, lv: Literal, expected_python_type: Type[CustomBigQueryTable]) -> CustomBigQueryTable:
       _, project_id, dataset_id, table_id = re.split("\\.|://|:", lv.scalar.structured_dataset.uri)
       table = f"projects/{project_id}/datasets/{dataset_id}/tables/{table_id}"
       parent = "projects/{}".format(project_id)
 
-      client = bigquery_storage.BigQueryReadClient(project=self._project_id)
+      client = bigquery_storage.BigQueryReadClient()
 
       requested_session = types.ReadSession(table=table, data_format=types.DataFormat.ARROW)
       read_session = client.create_read_session(parent=parent, read_session=requested_session)
