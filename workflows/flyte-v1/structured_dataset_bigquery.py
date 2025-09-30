@@ -23,12 +23,14 @@ image = ImageSpec(
   packages=[
     "pandas",
     "pandas_gbq",
+    "git+https://github.com/flyteorg/flytekit.git@6d43894acf24992e230522021d8cc8a938563157",
     "flytekitplugins-bigquery",
     "fastparquet",
     "pyarrow",
     "oracledb",
     "sqlalchemy",
   ],
+  apt_packages=["git"],
 )
 
 
