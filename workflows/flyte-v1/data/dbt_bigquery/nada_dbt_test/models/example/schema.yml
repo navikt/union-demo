@@ -1,0 +1,19 @@
+
+version: 2
+
+models:
+  - name: distinct
+    description: "Without duplicates"
+    columns:
+      - name: location
+        description: "The temp location"
+        tests:
+          - unique
+      - name: temperature
+        description: "The temperature recorded at the location"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: -10
+              max_value: 30
+          - dbt_expectations.expect_column_values_to_not_be_null
+          - failing
