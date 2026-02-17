@@ -1,0 +1,8 @@
+name: hello self hosted runner
+
+jobs:
+  build:
+    runs-on: my-runner-123
+    steps:
+      - name: Hello world action
+        run: echo "Hello world from self hosted runner"
