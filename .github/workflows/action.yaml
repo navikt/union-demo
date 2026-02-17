@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: my-runner-123
+    runs-on: self-hosted,my-runner-123
     steps:
       - name: Hello world action
         run: echo "Hello world from self hosted runner"
