@@ -1,5 +1,9 @@
 name: hello self hosted runner
 
+trigger:
+  push:
+    branches: [ main ]
+
 jobs:
   build:
     runs-on: my-runner-123
