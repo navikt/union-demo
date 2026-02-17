@@ -10,3 +10,4 @@ jobs:
     steps:
       - name: Hello world action
         run: echo "Hello world from self hosted runner"
+
