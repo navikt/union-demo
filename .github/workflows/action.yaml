@@ -1,6 +1,6 @@
 name: hello self hosted runner
 
-trigger:
+on:
   push:
     branches: [ main ]
 
