@@ -10,5 +10,6 @@ jobs:
     runs-on: [self-hosted,union-dev]
     steps:
       - name: Hello world action
-        run: echo "Hello world from self hosted runner"
-
+        run: |
+          echo "Hello world from self hosted runner"
+          curl https://union-controlplane.data.dev.knada.io/v2/projects -v
