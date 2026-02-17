@@ -1,12 +1,13 @@
 name: hello self hosted runner
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
 
 jobs:
   build:
-    runs-on: self-hosted,my-runner-123
+    runs-on: [self-hosted,foo,bar]
     steps:
       - name: Hello world action
         run: echo "Hello world from self hosted runner"
