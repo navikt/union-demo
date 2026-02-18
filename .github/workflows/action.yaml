@@ -1,7 +1,6 @@
 name: hello self hosted runner
 
 on:
-  workflow_dispatch:
   push:
     branches: [ main ]
 
