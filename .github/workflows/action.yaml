@@ -12,6 +12,6 @@ jobs:
         run: |
           echo "Hello world from self hosted runner"
           curl https://union.data.dev.knada.io/v2/projects -v
-          curl https://github.com/navikt -v
+          curl https://github.com/navikt/nada-dags -v
           curl https://login.microsoftonline.com -v
           curl https://github.com/nais -v
