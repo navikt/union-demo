@@ -21,7 +21,7 @@ jobs:
         with:
           token_format: access_token
           workload_identity_provider: projects/483437874962/locations/global/workloadIdentityPools/ci-dataplattform/providers/ci-dataplattform
-          service_account: dataplattform-utsa-manager@nav-data-union-restricted-dev.iam.gserviceaccount.com
+          service_account: um-union-demo@nav-data-union-restricted-dev.iam.gserviceaccount.com
 
       - uses: ./actions/union-config
         with:

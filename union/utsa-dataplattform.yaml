@@ -10,3 +10,4 @@ spec:
     - name: dataplattform-development 
       externalAllowlist:
         - host: github.com 
+        - host: nrk.no
