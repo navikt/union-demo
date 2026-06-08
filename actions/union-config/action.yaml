@@ -1,0 +1,31 @@
+name: Union Config
+description: Apply Union configuration to the dataplane cluster.
+
+inputs:
+  manifest:
+    description: Union Team Service Accounts manifest file path, relative to the repository root.
+    required: true
+  environment:
+    description: Target environment (e.g. dev, prod).
+    required: true
+    default: prod
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v3
+      with:
+        install_components: gke-gcloud-auth-plugin
+
+    - name: Get cluster credentials 
+      shell: bash
+      run: |
+        gcloud container fleet memberships get-credentials \
+          "${{ inputs.environment }}-union-restricted" \
+          --project "nav-data-union-control-${{ inputs.environment }}"
+
+    - name: Apply Union Team Service Accounts manifest
+      shell: bash
+      run: |
+        kubectl apply -f "${{ inputs.manifest }}"

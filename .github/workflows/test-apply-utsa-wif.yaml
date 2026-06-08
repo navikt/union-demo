@@ -1,0 +1,30 @@
+name: Test apply Union configuration test for dataplattform-development
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apply-union-config:
+    name: Apply Union configuration
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        
+      - id: auth
+        name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          token_format: access_token
+          workload_identity_provider: projects/483437874962/locations/global/workloadIdentityPools/ci-dataplattform/providers/ci-dataplattform
+          service_account: dataplattform-utsa-manager@nav-data-union-restricted-dev.iam.gserviceaccount.com
+
+      - uses: ./actions/union-config
+        with:
+          manifest: union/utsa-dataplattform.yaml
+          environment: dev
+

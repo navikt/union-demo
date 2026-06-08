@@ -1,0 +1,12 @@
+apiVersion: data.nav.no/v1alpha1
+kind: UnionTeamServiceAccounts
+metadata:
+  name: dataplattform-development
+  namespace: dataplattform-development
+spec:
+  project: dataplattform
+  domain: development
+  serviceAccounts:
+    - name: dataplattform-development 
+      externalAllowlist:
+        - host: github.com 

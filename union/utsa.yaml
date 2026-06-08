@@ -1,0 +1,14 @@
+apiVersion: data.nav.no/v1alpha1
+kind: UnionTeamServiceAccounts
+metadata:
+  name: flytesnacks-development
+  namespace: flytesnacks-development
+spec:
+  project: flytesnacks
+  domain: development
+  serviceAccounts:
+    - name: flytesnacks-development 
+      externalAllowlist:
+        - host: github.com 
+      internalAllowlist:
+        - host: dmv04-scan.adeo.no
